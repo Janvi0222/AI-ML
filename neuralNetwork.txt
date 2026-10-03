@@ -1,0 +1,40 @@
+import numpy as np
+from sklearn.neural_network import MLPClassifier
+
+X = np.array([
+    [1, 50],
+    [2, 55],
+    [2, 60],
+    [3, 65],
+    [4, 70],
+    [5, 75],
+    [6, 80],
+    [7, 85],
+    [8, 90],
+    [9, 95]
+])
+
+y = np.array([0, 0, 0, 0, 1, 1, 1, 1, 1, 1])
+
+model = MLPClassifier(hidden_layer_sizes=(5,), max_iter=1000, random_state=1)
+
+model.fit(X, y)
+
+test_data = np.array([
+    [2, 55],
+    [5, 75],
+    [8, 90]
+])
+
+predictions = model.predict(test_data)
+
+for i in range(len(test_data)):
+    if predictions[i] == 1:
+        result = "Pass"
+    else:
+        result = "Fail"
+
+    print("Study Hours:", test_data[i][0])
+    print("Attendance:", test_data[i][1], "%")
+    print("Prediction:", result)
+    print()
